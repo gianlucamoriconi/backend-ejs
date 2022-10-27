@@ -1,0 +1,50 @@
+[
+  {
+    "id": 1,
+    "title": "Harry Potter y la piedra Filosofal",
+    "price": 1000,
+    "thumbnail": "https://contrapunto.cl/13094/harry-potter-y-la-piedra-filosofal.jpg"
+  },
+  {
+    "id": 2,
+    "title": "Harry Potter y la cámara de los secretos",
+    "price": 1000,
+    "thumbnail": "https://images-na.ssl-images-amazon.com/images/S/pv-target-images/18b18f112ef76a9997f0235bf7913b96c2e50811582215ac16e37542c2af7882._RI_V_TTW_.jpg"
+  },
+  {
+    "id": 3,
+    "title": "Harry Potter y el prisionero de Azkaban",
+    "price": 1000,
+    "thumbnail": "https://static.wikia.nocookie.net/harrypotter/images/f/f7/Prisoner_of_Azkaban_New_UK_Cover.jpg/revision/latest?cb=20170109011341"
+  },
+  {
+    "id": 4,
+    "title": "Harry Potter y el cáliz de fuego",
+    "price": 1000,
+    "thumbnail": "https://es.web.img2.acsta.net/pictures/14/04/30/11/29/268191.jpg"
+  },
+  {
+    "id": 5,
+    "title": "Harry Potter y la Órden del fénix",
+    "price": 1000,
+    "thumbnail": "https://contentv2.tap-commerce.com/cover/large/9789878000145_1.jpg?id_com=1113"
+  },
+  {
+    "id": 6,
+    "title": "Harry Potter y el misterio del príncipe",
+    "price": 1000,
+    "thumbnail": "https://static.wikia.nocookie.net/esharrypotter/images/a/a9/VJ6_Harry_Potter_6_videojuego.jpg/revision/latest?cb=20110817204914"
+  },
+  {
+    "id": 7,
+    "title": "Harry Potter y las reliquias de la muerte - Parte 1",
+    "price": 1000,
+    "thumbnail": "https://www.tematika.com/media/catalog/Ilhsa/Imagenes/654330.jpg"
+  },
+  {
+    "id": 7,
+    "title": "Harry Potter y las reliquias de la muerte - Parte 2",
+    "price": 1000,
+    "thumbnail": "https://play-lh.googleusercontent.com/3ZGbNSG7JwScahbcrBcG0trbWFqsybZxfSMUzvcvDXVsjD6tQ4_DIwoCDA8bX9m743B4XRTM1n6OTpl-iF0"
+  }
+]
