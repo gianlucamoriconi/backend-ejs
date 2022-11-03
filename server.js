@@ -14,60 +14,41 @@ const router = Router();
 const products = new Products(__dirname + '/data/products.json')
 
 router.get('/', (req, res)=>{
-    try {
-        let products_read = products.getAll();
-        products_read = JSON.stringify(products_read, null, 2);
-        
-        res.header("Content-Type",'application/json');
-        res.send(products_read);
-    }
-    catch (err) {
-        console.log(err);
-    };
+    let products_read = products.getAll();
+    products_read = JSON.stringify(products_read, null, 2);
+    
+    res.header("Content-Type",'application/json');
+    res.send(products_read);
 });
 
 
 router.get('/:id', (req, res)=>{
-    try {
-        const id = req.params.id;
-        let get_by_id = products.getById(id);
-        get_by_id = JSON.stringify(get_by_id, null, 2);
+    const id = req.params.id;
+    let get_by_id = products.getById(id);
+    get_by_id = JSON.stringify(get_by_id, null, 2);
 
-        res.header("Content-Type",'application/json');
-        res.send(get_by_id);
-         
-    }
-    catch (err) {
-        res.send(err);
-    };
+    res.header("Content-Type",'application/json');
+    res.send(get_by_id);
 });
 
 
 router.post('/', (req, res) =>{
-    try{
-        adding_product = products.save(req.body);
-        res.send(adding_product);
-    }
-
-    catch (error){
-        res.send(error);
-    }
+    const dataProductToAdd = req.body;
+    const adding_product = products.save(dataProductToAdd);
+    res.send({"message": adding_product, "Información del producto creado": dataProductToAdd});
 });
 
+router.put('/:id', (req, res) =>{
+    const id = req.params.id;
+    const updateData = req.body
+    let updating_product = products.update(id, updateData);
+    res.send({"message": updating_product, "Información del producto actualizado": updateData});
+});
 
 router.delete('/:id', (req, res)=>{
-    try {
-        const id = req.params.id;
-        let delete_by_id = products.deleteById(id);
-        delete_by_id = JSON.stringify(delete_by_id, null, 2);
-
-        res.header("Content-Type",'application/json');
-        res.send(delete_by_id);
-         
-    }
-    catch (err) {
-        console.log(err);
-    };
+    const id = req.params.id;
+    let delete_by_id = products.deleteById(id);
+    res.send(delete_by_id);
 });
 
 

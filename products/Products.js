@@ -6,30 +6,6 @@ class Products {
         this.getAll();
     }
 
-    // init(){
-    //     try{
-    //         console.log(`Cargando ${this.fileName}`);
-    //         const data = fs.readFileSync(this.fileName);
-    //         const fileData = JSON.parse(data);
-    //         console.log('Archivo de productos cargado correctamente.');
-    //     }
-    //     catch(err){
-    //         console.log(`Ocurrio un error al inicializar ${this.fileName}: ${err}`);
-    //     }
-    // }
-
-    // getAll(){
-    //     try{
-    //         console.log(`Cargando ${this.fileName}`);
-    //         const data = fs.readFileSync(this.fileName);
-    //         const productsData = JSON.parse(data);
-    //         console.log('El listado de productos fue entregado');
-    //         return productsData;
-    //     }
-    //     catch(err){
-    //         console.log(`Ocurrio un error al intentar entregar los productos ${this.fileName}: ${err}`);
-    //     }
-    // }
 
     getAll(){
         try{
@@ -37,7 +13,7 @@ class Products {
 
             if (getProducts.length === 0){
                 console.log("El archivo está vacío.");
-                return `El archivo está vacío`;
+                return getProducts;
             }
            
             else {
@@ -86,6 +62,7 @@ class Products {
     //Escribir/Sobreescribir archivo
     save(product){
         var productsRead = this.getAll();
+        console.log(productsRead);
 
         if (productsRead.length === 0){
             console.log("Está vacío");
@@ -125,7 +102,7 @@ class Products {
 
             try{
                 fs.promises.writeFile(this.fileName, productsUpdate);
-                return `El producto fue guardado con el id: ${id}`;
+                return `El producto fue creado bajo el id ${id}`;
             }
     
             catch (error){
@@ -135,10 +112,34 @@ class Products {
         }
     }
 
+
+    update(idParam, product){
+        idParam = Number(idParam);
+        var productsRead = this.getAll();
+        var updateData = product;
+        //Nos aseguramos que al actualizar, el ID se mantenga y no se modifique con el id que podría estar en
+        //el cuerpo del body
+        updateData.id = idParam;
+
+        if (productsRead.some( (item) => item.id === idParam)) {
+            console.log("Existe el producto con ese ID");
+            let productUpdate = productsRead.filter(prod => prod.id !== updateData.id);
+            productUpdate.push(updateData);
+            fs.promises.writeFile(this.fileName, JSON.stringify(productUpdate, null, 2))
+            console.log(productUpdate);
+            return `La información del producto ${idParam} fue actualizada.`
+        }
+
+        else{
+            return `No existe ningún producto con el id ${idParam}. Antes de actualizar o editar un producto, es necesario que lo crees.`;
+        }
+    }
+
+
       //Borrar producto por ID
-      async deleteById(id){
+    deleteById(id){
         id = Number(id);
-        let products = await this.getAll();
+        let products = this.getAll();
 
         if (products.length !== 0){
             //Revisamos si existe el producto con ese ID
@@ -148,35 +149,39 @@ class Products {
                 products = products.filter((item) => item.id !== id);
                 try{
                     //Escribimos el listado con el producto ya filtrado
-                    await fs.promises.writeFile(this.fileName, JSON.stringify(products, null, 2))
+                    fs.promises.writeFile(this.fileName, JSON.stringify(products, null, 2))
                     console.log(`El producto con ID ${id} fue borrado`);
+                    return `El producto con ID ${id} fue borrado`;
                 }
 
                 catch (err){
                     console.log(`El producto con ID ${id} no pudo ser borrado: ${err}`);
+                    return `El producto con ID ${id} no pudo ser borrado: ${err}`;
                 }
 
             }
             
             else {
                 console.log(`El producto con id ${id} no existe`);
+                return `El producto con id ${id} no existe`
             } 
         }
         
         else {
-            console.log("No se puede eliminar por ID porque la lista de productos está vacía.")
+            console.log("No se puede eliminar por ID porque la lista de productos está vacía.");
+            return "No se puede eliminar por ID porque la lista de productos está vacía.";
         }
     }
 
     //Borrar todos los productos
-    async deleteAll(){
+    deleteAll(){
 
-        let products = await this.getAll();
+        let products = this.getAll();
 
         if (products.length > 0){
             try{
-                await fs.promises.writeFile(this.fileName, JSON.stringify([], null, 2))
-                console.log('Todos los productos fueron borrados')
+                fs.promises.writeFile(this.fileName, JSON.stringify([], null, 2))
+                console.log('Todos los productos fueron borrados');
             }
     
             catch (err){
