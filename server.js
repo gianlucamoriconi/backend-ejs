@@ -38,17 +38,31 @@ router.get('/:id', (req, res)=>{
          
     }
     catch (err) {
-        console.log(err);
+        res.send(err);
     };
 });
 
 
 router.post('/', (req, res) =>{
-    // const { productToAdd } = req.body;
-    adding_product = products.save(req.body);
-    res.header("Content-Type",'application/json');
-    res.send(adding_product);
-})
+    let adding_product = products.save(req.body);
+    res.json(adding_product);
+});
+
+
+router.delete('/:id', (req, res)=>{
+    try {
+        const id = req.params.id;
+        let delete_by_id = products.deleteById(id);
+        delete_by_id = JSON.stringify(delete_by_id, null, 2);
+
+        res.header("Content-Type",'application/json');
+        res.send(delete_by_id);
+         
+    }
+    catch (err) {
+        console.log(err);
+    };
+});
 
 
 app.use('/api/productos', router)
