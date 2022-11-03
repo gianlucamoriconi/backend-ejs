@@ -40,5 +40,17 @@
     "title": "Harry Potter y las reliquias de la muerte - Parte 1",
     "price": 1000,
     "thumbnail": "https://www.tematika.com/media/catalog/Ilhsa/Imagenes/654330.jpg"
+  },
+  {
+    "id": 8,
+    "title": "The Witcher",
+    "price": 1000,
+    "thumbnail": "https://play-lh.googleusercontent.com/3ZGbNSG7JwScahbcrBcG0trbWFqsybZxfSMUzvcvDXVsjD6tQ4_DIwoCDA8bX9m743B4XRTM1n6OTpl-iF0"
+  },
+  {
+    "id": 9,
+    "title": "The Witcher",
+    "price": 1000,
+    "thumbnail": "https://play-lh.googleusercontent.com/3ZGbNSG7JwScahbcrBcG0trbWFqsybZxfSMUzvcvDXVsjD6tQ4_DIwoCDA8bX9m743B4XRTM1n6OTpl-iF0"
   }
 ]

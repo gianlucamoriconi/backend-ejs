@@ -3,31 +3,52 @@ class Products {
 
     constructor(fileName='products.json'){
         this.fileName = fileName;
-        this.init();
+        this.getAll();
     }
 
-    init(){
-        try{
-            console.log(`Cargando ${this.fileName}`);
-            const data = fs.readFileSync(this.fileName);
-            const fileData = JSON.parse(data);
-            console.log('Archivo de productos cargado correctamente.');
-        }
-        catch(err){
-            console.log(`Ocurrio un error al inicializar ${this.fileName}: ${err}`);
-        }
-    }
+    // init(){
+    //     try{
+    //         console.log(`Cargando ${this.fileName}`);
+    //         const data = fs.readFileSync(this.fileName);
+    //         const fileData = JSON.parse(data);
+    //         console.log('Archivo de productos cargado correctamente.');
+    //     }
+    //     catch(err){
+    //         console.log(`Ocurrio un error al inicializar ${this.fileName}: ${err}`);
+    //     }
+    // }
+
+    // getAll(){
+    //     try{
+    //         console.log(`Cargando ${this.fileName}`);
+    //         const data = fs.readFileSync(this.fileName);
+    //         const productsData = JSON.parse(data);
+    //         console.log('El listado de productos fue entregado');
+    //         return productsData;
+    //     }
+    //     catch(err){
+    //         console.log(`Ocurrio un error al intentar entregar los productos ${this.fileName}: ${err}`);
+    //     }
+    // }
 
     getAll(){
         try{
-            console.log(`Cargando ${this.fileName}`);
-            const data = fs.readFileSync(this.fileName);
-            const productsData = JSON.parse(data);
-            console.log('El listado de productos fue entregado');
-            return productsData;
+            let getProducts = fs.readFileSync(this.fileName);
+
+            if (getProducts.length === 0){
+                console.log("El archivo está vacío.");
+                return `El archivo está vacío`;
+            }
+           
+            else {
+                getProducts = JSON.parse(getProducts);
+                console.log("El archivo tiene productos.");
+                return getProducts;
+            }
         }
-        catch(err){
-            console.log(`Ocurrio un error al intentar entregar los productos ${this.fileName}: ${err}`);
+
+        catch (err){
+            console.log(`No se pudo leer el archivo: ${err}`);
         }
     }
     
@@ -63,7 +84,7 @@ class Products {
     }    
 
     //Escribir/Sobreescribir archivo
-    async save(product){
+    save(product){
         var productsRead = this.getAll();
 
         if (productsRead.length === 0){

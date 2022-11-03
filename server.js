@@ -44,8 +44,14 @@ router.get('/:id', (req, res)=>{
 
 
 router.post('/', (req, res) =>{
-    let adding_product = products.save(req.body);
-    res.json(adding_product);
+    try{
+        adding_product = products.save(req.body);
+        res.send(adding_product);
+    }
+
+    catch (error){
+        res.send(error);
+    }
 });
 
 
