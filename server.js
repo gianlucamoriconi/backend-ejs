@@ -30,44 +30,27 @@ app.get('/agregar-producto', (req, res)=>{
 
 router.get('/', (req, res)=>{
     let products_read = products.getAll();
-    const title = "Todos los productos"
-    // products_read = JSON.stringify(products_read, null, 2);
+    products_read = JSON.stringify(products_read, null, 2);
     
-    // res.header("Content-Type",'application/json');
-    // res.send(products_read);
-    res.render('pages/product-list', {products_read, title});
-});
-
-router.get('/:id', (req, res)=>{
-    const id = req.params.id;
-    let get_by_id = products.getById(id);
-    get_by_id = JSON.stringify(get_by_id, null, 2);
-
     res.header("Content-Type",'application/json');
-    res.send(get_by_id);
-});
+    res.send(products_read);
 
+    const layout = "productList";
+    const title = "Todos los productos"
+    res.render('pages/index', {products_read, title, layout});
+});
 
 router.post('/', (req, res) =>{
+    //Cargamos el producto
     const dataProductToAdd = req.body;
-    const adding_product = products.save(dataProductToAdd);
-    res.send({"message": adding_product, "Información del producto creado": dataProductToAdd});
+    products.save(dataProductToAdd);
+
+    //Luego de cargarlo, lo llevamos a ver todos los productos
+    let products_read = products.getAll();
+    const layout = "productList";
+    const title = "Todos los productos";
+    res.render('pages/index', {products_read, layout, title});
 });
-
-router.put('/:id', (req, res) =>{
-    const id = req.params.id;
-    const updateData = req.body
-    let updating_product = products.update(id, updateData);
-    res.send({"message": updating_product, "Información del producto actualizado": updateData});
-});
-
-router.delete('/:id', (req, res)=>{
-    const id = req.params.id;
-    let delete_by_id = products.deleteById(id);
-    res.send(delete_by_id);
-});
-
-
 
 const server = app.listen(Port, () => {
     console.log(
@@ -76,7 +59,7 @@ const server = app.listen(Port, () => {
 });
 
 
-app.use('/api/productos', router);
+app.use('/productos', router);
 app.use(express.static(__dirname + '/public'));
 
 
