@@ -1,26 +1,40 @@
 const Products = require('./products/Products.js');
 const express = require('express');
 const app = express();
-const { Router } = express;
+const { Router } = express; 
+const hostname = 'localhost';
+const Port = '8080';
+const router = Router();
+const products = new Products(__dirname + '/data/products.json');
 app.use(express.json());
 app.use(express.urlencoded({
     extended: true 
 }));
 
 
-const hostname = 'localhost';
-const Port = '8080';
-const router = Router();
-const products = new Products(__dirname + '/data/products.json')
+app.set('views', __dirname + '/views');
+app.set('view engine', 'ejs');
+
+app.get('/', (req, res)=>{
+    let products_read = products.getAll();
+    const title = "Todos los productos"
+    res.render('pages/product-list', {products_read, title});
+});
+
+app.get('/agregar-producto', (req, res)=>{
+    const title = "Agregar nuevo producto";
+    res.render('pages/index', {title});
+});
 
 router.get('/', (req, res)=>{
     let products_read = products.getAll();
-    products_read = JSON.stringify(products_read, null, 2);
+    const title = "Todos los productos"
+    // products_read = JSON.stringify(products_read, null, 2);
     
-    res.header("Content-Type",'application/json');
-    res.send(products_read);
+    // res.header("Content-Type",'application/json');
+    // res.send(products_read);
+    res.render('pages/product-list', {products_read, title});
 });
-
 
 router.get('/:id', (req, res)=>{
     const id = req.params.id;
@@ -52,8 +66,15 @@ router.delete('/:id', (req, res)=>{
 });
 
 
-app.use('/api/productos', router)
-app.use(express.static('./public'))
-app.listen(8080);
+
+const server = app.listen(Port, () => {
+    console.log(
+        `Server started on PORT http://127.0.0.1:${Port} at ${new Date().toLocaleString()}`
+    );
+});
+
+
+app.use('/api/productos', router);
+app.use(express.static(__dirname + '/public'));
 
 

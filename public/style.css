@@ -1,0 +1,45 @@
+.max-width-900{
+    max-width: 900px;
+}
+
+.item {
+    border-radius: 10px;
+    margin-bottom: 20px;
+    max-width: 300px;
+    padding: 15px;
+    text-align: center;
+}
+
+.item-image {
+    height: 250px;
+    width: auto;
+}
+
+.item-image img {
+    height: 100%;
+    object-fit: contain;
+    width: 100%;
+}
+
+.nav-link.active, .nav-link:hover {
+    background-color: rgba(114,255,48,.631)!important;
+    border-radius: 18px;
+    transition: .2s;
+}
+
+.logo-img {
+    height: 55px;
+    padding: 10px;
+    width: auto;
+}
+
+.logo-name {
+    font-size: 15px;
+}
+
+a.nav-link, .logo-name {
+    font-size: 15px;
+    transition: .2s;
+    font-weight: 300;
+    color: grey;
+}
