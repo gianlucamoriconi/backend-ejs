@@ -1,0 +1,3 @@
+Prefiero EJS únicamente por una cuestión de costumbre, familiaridad.
+Estoy acostumbrado a escribir HTML y lo prefiero antes que la alternativa que ofrece pug con la intención de facilitar este aspecto.
+Quizás dandole tiempo a Pug lo elija, pero por el momento prefiero seguir escribiendo el HTML y usar la sintaxis de EJS para las condicionales, includes y demás fragmentos de programación que me son más familiares.
