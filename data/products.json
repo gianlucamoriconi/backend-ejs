@@ -7,15 +7,15 @@
   },
   {
     "id": 2,
-    "title": "Harry Potter y la cámara de los secretos",
+    "title": "Harry Potter y la cámara secreta",
     "price": 1000,
-    "thumbnail": "https://images-na.ssl-images-amazon.com/images/S/pv-target-images/18b18f112ef76a9997f0235bf7913b96c2e50811582215ac16e37542c2af7882._RI_V_TTW_.jpg"
+    "thumbnail": "https://images.cdn2.buscalibre.com/fit-in/360x360/ad/4d/ad4df4ba516014a9fc39a0288a70957f.jpg"
   },
   {
     "id": 3,
     "title": "Harry Potter y el prisionero de Azkaban",
     "price": 1000,
-    "thumbnail": "https://static.wikia.nocookie.net/harrypotter/images/f/f7/Prisoner_of_Azkaban_New_UK_Cover.jpg/revision/latest?cb=20170109011341"
+    "thumbnail": "https://http2.mlstatic.com/D_NQ_NP_894351-MLA44131024754_112020-O.jpg"
   },
   {
     "id": 4,
@@ -33,7 +33,7 @@
     "id": 6,
     "title": "Harry Potter y el misterio del príncipe",
     "price": 1000,
-    "thumbnail": "https://static.wikia.nocookie.net/esharrypotter/images/a/a9/VJ6_Harry_Potter_6_videojuego.jpg/revision/latest?cb=20110817204914"
+    "thumbnail": "https://http2.mlstatic.com/D_NQ_NP_714546-MLA50536398601_072022-O.jpg"
   },
   {
     "id": 7,

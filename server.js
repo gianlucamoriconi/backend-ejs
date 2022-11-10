@@ -17,13 +17,15 @@ app.set('view engine', 'ejs');
 
 app.get('/', (req, res)=>{
     let products_read = products.getAll();
+    const layout = "productList";
     const title = "Todos los productos"
-    res.render('pages/product-list', {products_read, title});
+    res.render('pages/index', {products_read, title, layout});
 });
 
 app.get('/agregar-producto', (req, res)=>{
+    const layout = "addForm";
     const title = "Agregar nuevo producto";
-    res.render('pages/index', {title});
+    res.render('pages/index', {layout, title});
 });
 
 router.get('/', (req, res)=>{
