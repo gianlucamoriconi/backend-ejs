@@ -1,4 +1,4 @@
-const Products = require('./products/Products.js');
+const Products = require(__dirname + '/data/products/Products.js');
 const express = require('express');
 const app = express();
 const { Router } = express; 
