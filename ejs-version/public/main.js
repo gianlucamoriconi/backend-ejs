@@ -1,8 +1,13 @@
 const socket = io.connect();
+const formatterAR = new Intl.NumberFormat('es-AR', {
+    minimumFractionDigits: 2,
+    maximumFractionDigits: 2,
+  });
 
 const placeForMessage = document.getElementById("messages");
 const inputMessageBox = document.getElementById("messageInput");
-const buttonSend = document.getElementById("send-message")
+const buttonSend = document.getElementById("send-message");
+const placeForProducts = document.getElementById("product-list");
 
 buttonSend.addEventListener('click', () =>{
     const date = new Date();
@@ -10,8 +15,7 @@ buttonSend.addEventListener('click', () =>{
     var dateHour = date.getUTCHours() - 3;
     var dateMinutes = date.getUTCMinutes();
 
-    const numberTwoDigits = (num, places) => String(num).padStart(places, '0')
-
+    const numberTwoDigits = (num, places) => String(num).padStart(places, '0');
 
     if (dateHour < 0) {
         var dateHour = dateHour + 24;
@@ -29,7 +33,7 @@ buttonSend.addEventListener('click', () =>{
 
 
 
-function render(data){
+function renderMessage(data){
 
     const html = data.map((msg, i) =>{
         return (`<div class="message bg-dark d-flex mb-2">
@@ -48,12 +52,33 @@ function render(data){
 
 }
 
-function addMessage(e){
 
-    return false;
+function renderProducts(data){
+
+    const html = data.map((item) =>{
+        return (`<div id="${item.id}" class="item p-2 col-12 col-md-3 col-lg-4 bg-body rounded">
+        <div class="item-image">
+            <img class="rounded" src="${item.thumbnail}" alt="product">
+        </div>
+        <div class="item-info p-3">
+            <div class="item-info">
+                <h4 class="item-name">${item.title}</h4>
+            </div>
+            <div class="item-price-container mb-4">
+                <span class="fw-bold item-price">$${formatterAR.format(item.price)}</span>
+            </div>
+        </div>
+    </div>`)
+    }).join(" ");
+    placeForProducts.innerHTML = html;
+
 }
 
+
 socket.on('messages', function(data){
-    // const messageHTML = msgs.map( msg => `Usuario: ${msg.socketId} | mensaje: ${msg.message}`).join('<br>');
-    render(data);
+    renderMessage(data);
+});
+
+socket.on('products', function(data){
+    renderProducts(data);
 });

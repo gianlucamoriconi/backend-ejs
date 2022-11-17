@@ -72,7 +72,7 @@ class Products {
             productToAdd = [productToAdd];
             productToAdd = JSON.stringify(productToAdd, null, 2);
     
-            fs.promises.writeFile(this.fileName, productToAdd)
+            fs.writeFile(this.fileName, productToAdd)
             .then(res => {
                 console.log(`Guardaste el primer producto de la lista, el id es: 1`)
                 return "Guardaste el primer producto de la lista, el id es: 1";

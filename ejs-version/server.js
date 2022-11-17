@@ -23,6 +23,7 @@ const httpServer = new HttpServer(app);
 const io = new IOServer(httpServer);
 
 const messages = [];
+const productsS = [];
 
 io.on('connection', socket => {
     console.log('Nuevo cliente conectado.');
@@ -54,14 +55,24 @@ app.get('/agregar-producto', (req, res)=>{
 
 router.get('/', (req, res)=>{
     let products_read = products.getAll();
-    products_read = JSON.stringify(products_read, null, 2);
+    let products_read_parsed = JSON.stringify(products_read, null, 2);
     
     res.header("Content-Type",'application/json');
-    res.send(products_read);
+    res.send(products_read_parsed);
 
     const layout = "productList";
     const title = "Todos los productos"
-    res.render('pages/index', {products_read, title, layout});
+    res.render('pages/index', {products_read_parsed, title, layout});
+
+    io.on('connection', socket => {
+        let products_read = products.getAll();
+        socket.emit('products', products_read);
+    
+        socket.on('new-products', data => {
+            productsS.push(data);
+            io.sockets.emit('products', products_read);
+        });
+    });
 });
 
 router.post('/', (req, res) =>{
@@ -74,6 +85,12 @@ router.post('/', (req, res) =>{
     const layout = "productList";
     const title = "Todos los productos";
     res.render('pages/index', {products_read, layout, title});
+
+    io.on('connection', socket => {
+        socket.emit('products', products_read);
+        console.log('Producto nuevo cargado');
+    });
+
 });
 
 const server = httpServer.listen(Port, () => {
