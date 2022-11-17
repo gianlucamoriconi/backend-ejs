@@ -53,8 +53,35 @@ a.nav-link, .logo-name {
 }
 
 #chat{
-    right: 1px;
-    bottom: 1px;
+    right: 0px;
+    bottom: 0px;
     min-height: 250px;
 }
 
+@media (min-width: 1000px){
+    #chat{
+        position: fixed;
+        height: 100vh;
+    }
+}
+
+.h4{
+    font-size: 17px;
+}
+
+
+.author, .message-text {
+    font-size: 13px;
+}
+
+#messages-container {
+    height: calc(100% - 93px);
+}
+
+#message-input-container {
+    align-self: end;
+}
+
+.date{
+    font-size: 10px;
+}

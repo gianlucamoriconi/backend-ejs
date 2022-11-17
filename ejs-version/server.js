@@ -26,8 +26,10 @@ const messages = [];
 
 io.on('connection', socket => {
     console.log('Nuevo cliente conectado.');
-    socket.on('message', data => {
-        messages.push({socketId: socket.id, message: data});
+    socket.emit('messages', messages);
+
+    socket.on('new-message', data => {
+        messages.push(data);
         io.sockets.emit('messages', messages);
     });
 });
