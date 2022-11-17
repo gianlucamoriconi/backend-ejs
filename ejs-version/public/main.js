@@ -10,6 +10,9 @@ buttonSend.addEventListener('click', () =>{
     var dateHour = date.getUTCHours() - 3;
     var dateMinutes = date.getUTCMinutes();
 
+    const numberTwoDigits = (num, places) => String(num).padStart(places, '0')
+
+
     if (dateHour < 0) {
         var dateHour = dateHour + 24;
     } 
@@ -17,8 +20,8 @@ buttonSend.addEventListener('click', () =>{
     const message = {
         user: document.getElementById("username").value,
         text: document.getElementById("messageInput").value,
-        dateHour: dateHour,
-        dateMinutes: dateMinutes
+        dateHour: numberTwoDigits(dateHour, 2),
+        dateMinutes: numberTwoDigits(dateMinutes, 2)
     };
 
     socket.emit('new-message', message);

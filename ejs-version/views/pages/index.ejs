@@ -35,21 +35,8 @@
                     
                 <% } %>
             </div>
-            <div id="chat" class="col-lg-4 col-12 p-2 position-lg-fixed bg-dark shadow-sm ">
-                <div class="section-title p-2 pt-2 pt-lg-5">  
-                    <h4 class="text-center h4 fw-bold text-light">Aplicación de chat</h4>
-                </div>
-                <div id="messages-container" class="messages w-100 p-2 d-flex flex-wrap">
-                    <div id="messages" class="w-100 overflow-auto">
+            <%- include('../partials/chat'); %>
 
-                    </div>
-                    <div id="message-input-container" class="p-2 w-100">
-                        <input id="username" class="form-control mb-2 bg-dark text-light" type="text" name="username" placeholder="Tu nombre">
-                        <input id="messageInput" class="form-control mb-2 bg-dark text-light" type="text" name="messages" placeholder="Escribe un mensaje..."></input>
-                        <button id="send-message" class="btn btn-primary">Enviar</button>
-                    </div>
-                </div>
-            </div>
         </div>
 
     </main>

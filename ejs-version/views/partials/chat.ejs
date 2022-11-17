@@ -1,0 +1,25 @@
+<div id="chat" class="col-lg-4 col-12 p-2 position-lg-fixed bg-dark shadow-sm ">
+    <div class="section-title p-2 pt-2 pt-lg-5">  
+        <h4 class="text-center h4 fw-bold text-light">Aplicación de chat</h4>
+    </div>
+    <div id="messages-container" class="messages w-100 p-2 d-flex flex-wrap">
+        <div id="messages" class="w-100 overflow-auto">
+
+        </div>
+        <div id="message-input-container" class="p-2 w-100">
+            <input id="username" class="form-control mb-2 bg-dark text-light" type="text" name="username" placeholder="Tu nombre">
+
+            <div class="d-flex">
+                <div class="col-10">
+                    <input id="messageInput" class="form-control mb-2 bg-dark text-light" type="text" name="messages" placeholder="Escribe un mensaje..."></input>
+                </div>
+                <div class="col-2 ps-2">
+                    <button id="send-message" class="btn btn-primary"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-send" viewBox="0 0 16 16">
+                        <path d="M15.854.146a.5.5 0 0 1 .11.54l-5.819 14.547a.75.75 0 0 1-1.329.124l-3.178-4.995L.643 7.184a.75.75 0 0 1 .124-1.33L15.314.037a.5.5 0 0 1 .54.11ZM6.636 10.07l2.761 4.338L14.13 2.576 6.636 10.07Zm6.787-8.201L1.591 6.602l4.339 2.76 7.494-7.493Z"/>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

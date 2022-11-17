@@ -85,3 +85,20 @@ a.nav-link, .logo-name {
 .date{
     font-size: 10px;
 }
+
+#message-input-container input{
+    border: 0;
+    filter: brightness(0.8);
+}
+
+#messages {
+    max-height: 55vh;
+}
+
+button#send-message {
+    padding-left: 8px;
+    padding-right: 8px;
+    padding-top: 4px;
+    padding-bottom: 4px;
+    width: 100%;
+}
