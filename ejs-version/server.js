@@ -1,6 +1,14 @@
 const Products = require(__dirname + '/data/products/Products.js');
 const express = require('express');
+
+const { Server: HttpServer } = require('http');
+const { Server: IOServer } = require('socket.io');
+
 const app = express();
+
+app.use(express.static(__dirname + '/public'));
+app.use(express.static(__dirname));
+
 const { Router } = express; 
 const hostname = 'localhost';
 const Port = '8080';
@@ -10,6 +18,20 @@ app.use(express.json());
 app.use(express.urlencoded({
     extended: true 
 }));
+
+const httpServer = new HttpServer(app);
+const io = new IOServer(httpServer);
+
+const messages = [];
+
+io.on('connection', socket => {
+    console.log('Nuevo cliente conectado.');
+    socket.on('message', data => {
+        messages.push({socketId: socket.id, message: data});
+        io.sockets.emit('messages', messages);
+    });
+});
+
 
 
 app.set('views', __dirname + '/views');
@@ -52,14 +74,14 @@ router.post('/', (req, res) =>{
     res.render('pages/index', {products_read, layout, title});
 });
 
-const server = app.listen(Port, () => {
+const server = httpServer.listen(Port, () => {
     console.log(
         `Server started on PORT http://127.0.0.1:${Port} at ${new Date().toLocaleString()}`
     );
 });
 
+server.on('error', error => console.log(`Error en servidor: ${error}`));
 
 app.use('/productos', router);
-app.use(express.static(__dirname + '/public'));
 
 

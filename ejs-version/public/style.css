@@ -43,3 +43,18 @@ a.nav-link, .logo-name {
     font-weight: 300;
     color: grey;
 }
+
+.h2{
+    font-size: 24px;
+}
+
+.item-name{
+    font-size: 14px;
+}
+
+#chat{
+    right: 1px;
+    bottom: 1px;
+    min-height: 250px;
+}
+
