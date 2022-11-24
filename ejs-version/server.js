@@ -105,7 +105,9 @@ app.use('/api/cart', routerCart);
 //Crear carrito
 routerCart.post('/', (req, res) =>{
     const dataCart = req.body;
-    carts.createCart(dataCart);
+    const cartResponse = carts.createCart(dataCart);
+    res.header("Content-Type",'application/json');
+    res.send(cartResponse);
 });
 
 //Agregar producto al carrito

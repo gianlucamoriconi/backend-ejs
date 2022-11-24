@@ -35,34 +35,37 @@ class Carts {
                     const newCart = {
                         id: 1,
                         timestamp: `${dateDay}/${dateMonth} ${dateHour}: ${dateMinutes} : ${dateSeconds}`,
-                        products: products,
+                        products: dataCart,
                     };
                     cart.push(newCart);
-                    fs.writeFileSync(this.db, JSON.stringify(cart, null, 4), 'utf-8')
-                    res.status(201).send(`New cart created. ID:${newCart.id}`);
+                    fs.writeFileSync(this.db, JSON.stringify(cart, null, 2));
+                    return `New cart created. ID:${newCart.id}`;
                 } else {
                     const lastCartId = cart[cart.length - 1].id;
                     const newCartId = lastCartId + 1;
                     const newCart = {
                         id: newCartId,
                         timestamp: `${dateDay}/${dateMonth} ${dateHour}: ${dateMinutes} : ${dateSeconds}`,
-                        products: products,
+                        products: dataCart,
                     };
                     cart.push(newCart);
-                    fs.writeFileSync(this.db, JSON.stringify(cart, null, 4), 'utf-8')
-                    res.status(201).send(`New cart created. ID:${newCart.id}`);
+                    fs.writeFileSync(this.db, JSON.stringify(cart, null, 2));
+
+                    return `New cart created. ID:${newCart.id}`;
                 }
             } else {
                 const cart = [];
                 const newCart = req.body;
                 newCart.id = 1;
                 cart.push(newCart);
-                fs.writeFileSync(this.db, JSON.stringify(cart, null, 4), 'utf-8');
+                fs.writeFileSync(this.db, JSON.stringify(cart, null, 2));
+                return `New cart created. ID:${newCart.id}`;
             }
         }
 
         catch (err) {
             console.log(`An error ocurred in create cart method: ${err}`);
+            return `An error ocurred in create cart method: ${err}`;
         }
     }
 
@@ -126,7 +129,6 @@ class Carts {
 
     async deleteById(id) {
         try {
-            let admin = true;
             if (fs.existsSync(this.db)) {
                 const idParams = req.params.id;
                 const getCart = await JSON.parse(fs.readFileSync(this.db, 'utf-8'));
@@ -142,7 +144,6 @@ class Carts {
 
     addToCartById(id) {
         try {
-            let admin = true;
             if (fs.existsSync(this.db)) {
                 const idParams = req.params.id;
                 const getProducts = JSON.parse(fs.readFileSync('./products.json', 'utf-8'));
@@ -168,7 +169,6 @@ class Carts {
 
     deleteFromCartById(id) {
         try {
-            let admin = true;
             if (fs.existsSync(this.db)) {
                 const idCartParams = Number(req.params.id);
                 const idProductParams = Number(req.params.id_product);
