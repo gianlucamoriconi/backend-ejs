@@ -137,7 +137,9 @@ routerCart.get("/:id/products", (req, res) =>{
 //Borrar carrito
 routerCart.delete("/:id", (req, res) =>{
     const id = req.params.id;
-    carts.deleteCart(id);
+    const cartDeleteByIdResponse = carts.deleteCartById(id);
+    res.header("Content-Type",'application/json');
+    res.send(cartDeleteByIdResponse);
 });
 
 //Borrar producto de carrito

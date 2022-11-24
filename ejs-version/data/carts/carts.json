@@ -10,16 +10,6 @@
     }
   },
   {
-    "id": 2,
-    "timestamp": "4/10 11: 00 : 06",
-    "products": {
-      "id": 3,
-      "title": "Harry Potter y el prisionero de Azkaban",
-      "price": 1000,
-      "thumbnail": "https://http2.mlstatic.com/D_NQ_NP_894351-MLA44131024754_112020-O.jpg"
-    }
-  },
-  {
     "id": 3,
     "timestamp": "4/10 11: 00 : 52",
     "products": {

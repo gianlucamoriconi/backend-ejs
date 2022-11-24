@@ -127,20 +127,43 @@ class Carts {
 
     }
 
-    async deleteById(id) {
-        try {
-            if (fs.existsSync(this.db)) {
-                const idParams = req.params.id;
-                const getCart = await JSON.parse(fs.readFileSync(this.db, 'utf-8'));
-                const filterProducts = getCart.filter( item => item.id !== Number(idParams));
-                fs.writeFileSync(this.db, JSON.stringify(filterProducts, null, 4));
-                filterProducts.length == getCart.length ? res.send(`No cart matches ID:${idParams}`) : res.send(filterProducts);
+
+    deleteCartById(id){
+        id = Number(id);
+        let carts = this.getCarts();
+
+        if (carts !== "El archivo está vacío."){
+
+            if (carts.some((item) => item.id === id)){
+
+                carts = carts.filter((item) => item.id !== id);
+
+                try{
+                    fs.writeFileSync(this.db, JSON.stringify(carts, null, 2))
+                    console.log(`El carrito con ID ${id} fue borrado`);
+                    return `El carrito con ID ${id} fue borrado`;
+                }
+
+                catch (err){
+                    console.log(`El carrito con ID ${id} no pudo ser borrado: ${err}`);
+                    return `El carrito con ID ${id} no pudo ser borrado: ${err}`;
+                }
+
             }
+            
+            else {
+                console.log(`El carrito con id ${id} no existe`);
+                return `El carrito con id ${id} no existe`
+            } 
         }
-        catch (err) {
-            res.send(`An error ocurred in delete by id cart method: ${err}`);
+        
+        else {
+            console.log("No se puede eliminar por ID porque la lista de carritos está vacía.");
+            return "No se puede eliminar por ID porque la lista de carritos está vacía.";
         }
     }
+
+
 
     addToCartById(id) {
         try {
