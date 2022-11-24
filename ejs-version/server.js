@@ -44,6 +44,7 @@ app.get('/', (req, res)=>{
     let products_read = products.getAll();
     const layout = "productList";
     const title = "Todos los productos"
+
     res.render('pages/index', {products_read, title, layout});
 });
 
@@ -114,7 +115,9 @@ routerCart.post('/', (req, res) =>{
 routerCart.post('/:id/products', (req, res) =>{
     const id = req.params.id;
     const dataCart = req.body;
-    carts.addToCartById(id, dataCart);
+    const cartResponse = carts.addToCartById(id, dataCart);
+    res.header("Content-Type",'application/json');
+    res.send(cartResponse);
 });
 
 //Obtener carritos

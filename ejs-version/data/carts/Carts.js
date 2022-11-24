@@ -14,7 +14,11 @@ class Carts {
                 const numberTwoDigits = (num, places) => String(num).padStart(places, '0');
                 
                 let dateMonth = date.getUTCMonth();
+                dateMonth = numberTwoDigits(dateMonth, 2);
+
                 let dateDay = date.getUTCDay();
+                dateDay = numberTwoDigits(dateDay, 2);
+
 
                 //Calculamos la hora argentina restandole 3 a UTC
                 var dateHour = date.getUTCHours() - 3;
@@ -34,7 +38,7 @@ class Carts {
                 if (cart.length === 0) {
                     const newCart = {
                         id: 1,
-                        timestamp: `${dateDay}/${dateMonth} ${dateHour}: ${dateMinutes} : ${dateSeconds}`,
+                        timestamp: `${dateDay}/${dateMonth} ${dateHour}:${dateMinutes}:${dateSeconds}`,
                         products: dataCart,
                     };
                     cart.push(newCart);
@@ -164,29 +168,61 @@ class Carts {
     }
 
 
-
-    addToCartById(id) {
+    addToCartById(id, dataProduct) {
         try {
             if (fs.existsSync(this.db)) {
-                const idParams = req.params.id;
-                const getProducts = JSON.parse(fs.readFileSync('./products.json', 'utf-8'));
-                const getCart = JSON.parse(fs.readFileSync(this.db, 'utf-8'));
-                const findCart = getCart.find( item => item.id === Number(idParams));
-                if (findCart !== undefined) {
-                    const arrayFromFindProducts = findCart.products;
-                    const arrayForPush = arrayFromFindProducts.concat(getProducts);
-                    findCart.products = arrayForPush;
-                    fs.writeFileSync(this.db, JSON.stringify(getCart, null, 4));
-                    res.send(`Product added to cart with ID:${idParams} successfully!`);
-                } else {
-                    res.send(`No cart with ID:${idParams}`);
-                };
+                id = Number(id);
+                var carts = this.getCarts();
+
+                var result = [];
+
+                if (typeof dataProduct !== 'object'){
+                    result = 'El contenido que enviaste no es un objeto. Por favor, envía el producto a agregar como un objeto, ya que se incorporará en un arreglo.'
+                }
+
+                else if (carts.some( (cart) => cart.id === id)) {
+                    console.log("Existe el producto con ese ID");
+
+                    carts.map((cart) => {
+                        console.log("Maping carts");
+                        if (cart.id === id){
+                            console.log("El cart ID existe");
+
+                            if (carts.some( (cart) => cart.id === id)) {
+                                cart.products.map((product) => {
+                                    if (product.id === dataProduct.id) {
+                                        let productsInCart = cart.products.filter((prod) => prod.id !== dataProduct.id);
+                                        console.log(productsInCart);
+                                        productsInCart = [productsInCart, dataProduct];
+                                        fs.writeFileSync(this.db, JSON.stringify(productsInCart, null, 2));
+                                        console.log("El producto en el carrito existe");
+                                        result = `El producto que agregaste ya existía y fue actualizado.`;
+                                    }
+                                });
+                            }
+
+                            else{
+                                console.log("El producto en el carrito no existe");
+                                cart.products.push(dataProduct);
+                                fs.writeFileSync(this.db, JSON.stringify(carts, null, 2));
+                                result = `La información del carrito ${id} fue actualizada.`
+                            }
+                        }
+                    });
+                }
+        
+                else{
+                    result = `No existe ningún carrito con el id ${id}. Antes de actualizar o editar un carrito, es necesario que lo crees.`;
+                }
+
+                return result;
+
             } else {
-                res.send(`No cart file provided. Please add one.`);
+                return(`No cart file provided. Please add one.`);
             }
         }
         catch (err) {
-            res.send(`An error ocurred in add cart by id method: ${err}`);
+            return(`An error ocurred in add cart by id method: ${err}`);
         }
     }
 

@@ -102,3 +102,18 @@ button#send-message {
     padding-bottom: 4px;
     width: 100%;
 }
+
+.trash{
+    border: initial!important;
+    box-shadow: none!important;
+    padding: 0;
+}
+
+.trash, .trash svg {
+    background: initial!important;
+}
+
+.item-name-cart {
+    font-size: 17px;
+}
+

@@ -2,31 +2,61 @@
   {
     "id": 1,
     "timestamp": "4/10 10: 59 : 31",
-    "products": {
-      "id": 3,
-      "title": "Harry Potter y el prisionero de Azkaban",
-      "price": 1000,
-      "thumbnail": "https://http2.mlstatic.com/D_NQ_NP_894351-MLA44131024754_112020-O.jpg"
-    }
+    "products": [
+      {
+        "id": 3,
+        "title": "Harry Potter y el prisionero de Azkaban",
+        "price": 1000,
+        "thumbnail": "https://http2.mlstatic.com/D_NQ_NP_894351-MLA44131024754_112020-O.jpg"
+      },
+      {
+        "id": 5,
+        "title": "Harry Potter y la Órden del fénix",
+        "price": 1000,
+        "thumbnail": "https://contentv2.tap-commerce.com/cover/large/9789878000145_1.jpg?id_com=1113"
+      },
+      {
+        "id": 6,
+        "title": "Harry Potter y el misterio del príncipe",
+        "price": 1000,
+        "thumbnail": "https://http2.mlstatic.com/D_NQ_NP_714546-MLA50536398601_072022-O.jpg"
+      },
+      {
+        "id": 7,
+        "title": "Harry Potter y las reliquias de la muerte - Parte 1",
+        "price": 1000,
+        "thumbnail": "https://www.tematika.com/media/catalog/Ilhsa/Imagenes/654330.jpg"
+      }
+    ]
   },
   {
     "id": 3,
     "timestamp": "4/10 11: 00 : 52",
-    "products": {
-      "id": 3,
-      "title": "Harry Potter y el prisionero de Azkaban",
-      "price": 1000,
-      "thumbnail": "https://http2.mlstatic.com/D_NQ_NP_894351-MLA44131024754_112020-O.jpg"
-    }
+    "products": [
+      {
+        "id": 3,
+        "title": "Harry Potter y el prisionero de Azkaban",
+        "price": 1000,
+        "thumbnail": "https://http2.mlstatic.com/D_NQ_NP_894351-MLA44131024754_112020-O.jpg"
+      },
+      {
+        "id": 12,
+        "title": "Push de nuevo producto",
+        "price": 1000,
+        "thumbnail": "https://http2.mlstatic.com/D_NQ_NP_894351-MLA44131024754_112020-O.jpg"
+      }
+    ]
   },
   {
     "id": 4,
     "timestamp": "4/10 11: 01 : 52",
-    "products": {
-      "id": 3,
-      "title": "Harry Potter y el prisionero de Azkaban",
-      "price": 1000,
-      "thumbnail": "https://http2.mlstatic.com/D_NQ_NP_894351-MLA44131024754_112020-O.jpg"
-    }
+    "products": [
+      {
+        "id": 3,
+        "title": "Harry Potter y el prisionero de Azkaban",
+        "price": 1000,
+        "thumbnail": "https://http2.mlstatic.com/D_NQ_NP_894351-MLA44131024754_112020-O.jpg"
+      }
+    ]
   }
 ]
